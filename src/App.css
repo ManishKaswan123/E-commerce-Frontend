@@ -1,0 +1,102 @@
+/* * {
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.greenColor {
+  color: green;
+}
+
+.redColor {
+  color: red;
+} */
+
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.navbar {
+  width: 100%;
+  background-color: rgb(241, 240, 240);
+  position: fixed;
+  z-index: 3;
+}
+
+.navbar-toggler {
+  background-color: rgb(115, 114, 114);
+}
+.navbar-toggler.collapsed {
+  background-color: rgb(115, 114, 114);
+}
+.navbar-nav {
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar-collapse {
+  padding-left: 2.7rem;
+}
+
+.navbar-nav .nav-link {
+  padding: 1rem; /* Adjust padding for space around links */
+  color: black; /* Set the color for the links */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #eb4034; /* Set the color for the links on hover */
+}
+
+.navbar-nav .nav-link.active {
+  color: black;
+  display: flex;
+  /* justify-content: center;
+  text-align: center; */
+}
+.navbar-brand {
+  color: black; /* Set the color for the brand/logo */
+}
+
+.navbar-brand:hover {
+  color: #eb4034; /* Set the color for the brand/logo on hover */
+}
+
+.profile {
+  z-index: 5;
+}
+
+button {
+  border-color: transparent;
+}
+@media screen and (min-width: 992px)  {
+  .navbar {
+    height: 6rem;
+  }
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .navbar-nav .nav-link {
+    padding: 0;
+    font-size: 1rem;
+  }
+  .navbar {
+    min-height: 5rem;
+    padding: 0;
+    margin: 0;
+  }
+}
