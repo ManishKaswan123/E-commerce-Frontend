@@ -17,10 +17,10 @@ const getProduct = (keyword = "" , currentPage = 1 , price = [0 , 250000] , cate
         });
 
         // console.log("ok" , keyword);
-        let link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+        let link = `https://e-commerce-backend-2-gck1.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
         if(category)
-            link = `http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+            link = `https://e-commerce-backend-2-gck1.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
 
         const { data } = await axios.get(link);
 
@@ -45,7 +45,7 @@ const getProductDetails = ({id}) => async (dispatch) => {
             type: PRODUCT_DETAILS_REQUEST
         });
 
-        const { data } = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
+        const { data } = await axios.get(`https://e-commerce-backend-2-gck1.onrender.com/api/v1/product/${id}`);
         console.log("data is" , data);
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

@@ -36,7 +36,7 @@ const login = (email, password) => async (dispatch , getState) => {
         const config = {headers: {"Content-Type": "application/json"}};
 
         const {data} = await axios.post(
-            `http://localhost:4000/api/v1/login` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/login` ,
             {email , password} ,
             config
         );
@@ -65,7 +65,7 @@ const register = (userData) => async (dispatch) => {
         const config = {headers: {"Content-Type": "multipart/form-data"}};
 
         const {data} = await axios.post(
-            `http://localhost:4000/api/v1/register` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/register` ,
             userData,
             config
         );
@@ -90,7 +90,7 @@ const loadUser = () => async (dispatch) => {
     try {
         dispatch({type: LOAD_USER_REQUEST});
 
-        const {data} = await axios.get(`http://localhost:4000/api/v1/me` );
+        const {data} = await axios.get(`https://e-commerce-backend-2-gck1.onrender.com/api/v1/me` );
     
         console.log("load user is running" , data);
         dispatch({ 
@@ -110,7 +110,7 @@ const loadUser = () => async (dispatch) => {
 // LogOut User
 const logout = () => async (dispatch) => {
     try {
-        await axios.get(`http://localhost:4000/api/v1/logout` );
+        await axios.get(`https://e-commerce-backend-2-gck1.onrender.com/api/v1/logout` );
         dispatch({ 
             type: LOGOUT_SUCCESS 
         });
@@ -133,7 +133,7 @@ const updateProfile = (userData) => async (dispatch) => {
         const config = {headers: {"Content-Type": "multipart/form-data"}};
 
         const {data} = await axios.put(
-            `http://localhost:4000/api/v1/me/update` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/me/update` ,
             userData,
             config
         );
@@ -159,7 +159,7 @@ const updatePassword = (passwords) => async (dispatch) => {
 
         const config = {headers: {"Content-Type": "application/json"}};
         const {data} = await axios.put(
-            `http://localhost:4000/api/v1/password/update` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/password/update` ,
             passwords,
             config
         );
@@ -186,7 +186,7 @@ const forgotPassword = (email) => async (dispatch) => {
         const config = {headers: {"Content-Type": "application/json"}};
 
         const {data} = await axios.post(
-            `http://localhost:4000/api/v1/password/forgot` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/password/forgot` ,
             email ,
             config
         );
@@ -213,7 +213,7 @@ const resetPassword = (token , passwords) => async (dispatch) => {
         const config = {headers: {"Content-Type": "application/json"}};
 
         const {data} = await axios.put(
-            `http://localhost:4000/api/v1/password/reset/${token}` ,
+            `https://e-commerce-backend-2-gck1.onrender.com/api/v1/password/reset/${token}` ,
             passwords,
             config
         );

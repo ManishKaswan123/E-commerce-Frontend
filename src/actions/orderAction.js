@@ -17,7 +17,7 @@ const createOrder = (order) => async(dispatch , getState) => {
             },
         };
 
-        const {data} = await axios.post(`http://localhost:4000/api/v1/order/new` , order , config);
+        const {data} = await axios.post(`https://e-commerce-backend-2-gck1.onrender.com/api/v1/order/new` , order , config);
 
         console.log("createOrder data is :-", data);
         dispatch({
