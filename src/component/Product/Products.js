@@ -19,6 +19,142 @@ const categories = [
 ];
 
 const Products = () => {
+    const productData =  [
+        {
+            ratings: 0,
+            Stock: 32,
+            numOfReviews: 0,
+            _id: "6414759dd53f826ef7eb5931",
+            name: "product2",
+            description: "This is a sample Product2",
+            price: 1,
+            rating: 0,
+            images: [
+                {
+                    public_id: "sample Image",
+                    url: "https://i.ibb.co/DRST11n/1.webp",
+                    _id: "6414759dd53f826ef7eb5932"
+                }
+            ],
+            category: "Mobile",
+            reviews: [],
+            createdAt: "2023-03-17T14:13:49.768Z",
+            __v: 0
+        },
+        {
+            ratings: 5,
+            Stock: 10,
+            numOfReviews: 1,
+            _id: "646cbab0494197ecad05bd43",
+            name: "Samsung book 2",
+            description: "This is a sample Product",
+            price: 1,
+            category: "Laptop",
+            user: "6415f5265ed6aba73832cde6",
+            images: [
+                {
+                    public_id: "sample Image",
+                    url: "https://i.ibb.co/DRST11n/1.webp",
+                    _id: "658e8c7d24ea4eef1999dd82"
+                }
+            ],
+            reviews: [
+                {
+                    user: "646d900a7ad7f994fd7d8435",
+                    name: "Abhishek",
+                    rating: 5,
+                    comment: "Just okay product",
+                    _id: "646d90707ad7f994fd7d843f"
+                }
+            ],
+            createdAt: "2023-05-23T13:08:00.287Z",
+            __v: 2
+        },
+        {
+            ratings: 0,
+            Stock: 15,
+            numOfReviews: 0,
+            _id: "658e8b3624ea4eef1999dd68",
+            name: "Realme ultra",
+            description: "This is a sample Product",
+            price: 1,
+            images: [
+                {
+                    public_id: "Sample Iamge",
+                    url: "https://i.ibb.co/DRST11n/1.webp",
+                    _id: "658e8b3624ea4eef1999dd69"
+                }
+            ],
+            category: "Mobile Phone",
+            user: "658c18299eff3ab4d7913f2b",
+            reviews: [],
+            createdAt: "2023-12-29T09:02:46.438Z",
+            __v: 0
+        },
+        {
+            ratings: 0,
+            Stock: 5,
+            numOfReviews: 0,
+            _id: "658e8b6f24ea4eef1999dd6c",
+            name: "Samsang s22",
+            description: "This is a sample Product",
+            price: 1,
+            images: [
+                {
+                    public_id: "Sample Iamge",
+                    url: "https://i.ibb.co/DRST11n/1.webp",
+                    _id: "658e8b6f24ea4eef1999dd6d"
+                }
+             ],
+             category: "Mobile Phone",
+             user: "658c18299eff3ab4d7913f2b",
+             reviews: [],
+             createdAt: `2023-12-29T09:03:43.509Z`,
+             __v: 0
+         },
+         {
+             ratings: 0,
+             Stock: 7,
+             numOfReviews: 0,
+             _id: "658e8b9324ea4eef1999dd70",
+             name: "Macbook air m1",
+             description: "This is a sample Product",
+             price: "73000",
+             images: [
+                 {
+                     public_id: "Sample Iamge",
+                     url: "https://i.ibb.co/DRST11n/1.webp",
+                     _id: "658e8b9324ea4eef1999dd71"
+                 }
+             ],
+             category: `Laptop`,
+             user: `658c18299eff3ab4d7913f2b`,
+             reviews: [],
+             createdAt: "2023-12-29T09:04:19.320Z",
+             __v: `0`
+         },
+         {
+             ratings: `0`,
+             Stock: `3`,
+             numOfReviews: `0`,
+             _id: `658e8bab24ea4eef1999dd74`,
+             name: `Dell`,
+             description: `This is a sample Product`,
+             price: `45000`,
+             images: [
+                 {
+                     public_id: "Sample Iamge",
+                     url: "https://i.ibb.co/DRST11n/1.webp",
+                     _id: "658e8bab24ea4eef1999dd75"
+                 }
+             ],
+             category: `Laptop`,
+             user: `658c18299eff3ab4d7913f2b`,
+             reviews: [],
+             createdAt: "2023-12-29T09:04:43.670Z",
+             __v: `0`
+         }
+     ]
     let totalPages = 1;
     const dispatch = useDispatch();
     const keywords = useParams();
@@ -64,7 +200,7 @@ const Products = () => {
         dispatch(getProduct(keywords.keyword, currentPage, price, selectedCategories.join(','), ratings));
     };
 
-    const { products, loading, error, productsCount, resultPerPage, filteredProductsCount } = useSelector(
+    const { products, error, productsCount, resultPerPage, filteredProductsCount } = useSelector(
         (state) => state.products
     );
 
@@ -80,17 +216,20 @@ const Products = () => {
     }, [dispatch, keywords.keyword, currentPage]);
 
     return (
-        <Fragment>
-            {loading ? <Loader /> :
                 <Fragment>
                     <MetaData title="PRODUCTS --- ECOMMERCE" />
                     <div className="bg-teal-100 min-h-screen p-6">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="md:col-span-2">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {products && products.map((product) => (
+                                    {products ? products.map((product) => (
                                         <ProductCard key={product._id} product={product} />
-                                    ))}
+                                        )) : (
+                                        productData.map((product) => (
+                                            <ProductCard key={product._id} product={product} />
+                                        ))
+                                    )
+                                    }
                                 </div>
                             </div>
 
@@ -186,8 +325,6 @@ const Products = () => {
                         )}
                     </div>
                 </Fragment>
-            }
-        </Fragment>
     );
 };
 

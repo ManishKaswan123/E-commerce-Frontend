@@ -147,7 +147,7 @@ function Home() {
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, products } = useSelector((state) => state.products);
+    const {products } = useSelector((state) => state.products);
 
     useEffect(() => {
         dispatch(getProduct());
@@ -164,10 +164,6 @@ function Home() {
     }
 
     return (
-        <>
-            {loading ? (
-                <Loader />
-            ) : (
                 <>
                     {/* Background and Text Section */}
                     <section className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-white text-white relative overflow-hidden">
@@ -224,8 +220,6 @@ function Home() {
                         </div>
                     </section>
                 </>
-            )}
-        </>
     );
 };
 
