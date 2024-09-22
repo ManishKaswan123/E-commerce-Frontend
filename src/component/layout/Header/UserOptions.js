@@ -1,34 +1,28 @@
 import React, { Fragment, useState } from "react";
-import "./Header.css";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import Backdrop from "@material-ui/core/Backdrop";
-import PersonIcon from "@material-ui/icons/Person";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ListAltIcon from "@material-ui/icons/ListAlt";
+import { Backdrop } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userAction";
 import { toast } from "react-hot-toast";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Tooltip } from "@material-ui/core";
+import { FaShoppingCart, FaUserAlt, FaSignOutAlt, FaListAlt, FaTachometerAlt } from "react-icons/fa"; // Importing icons from react-icons for consistency
 
 const UserOptions = ({ user }) => {
-  const {cartItems} = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const options = [
-    { icon: <ListAltIcon />, name: "Orders", func: orders },
-    { icon: <PersonIcon />, name: "Profile", func: account },
-    { icon: <ShoppingCartIcon style={{color: cartItems.length > 0 ? "tomato" : "unset"}}/>, name: `Cart(${cartItems.length})`, func: cart },
-    { icon: <ExitToAppIcon />, name: "Logout", func: LogoutUser },
+    { icon: <FaListAlt />, name: "Orders", func: orders },
+    { icon: <FaUserAlt />, name: "Profile", func: account },
+    { icon: <FaShoppingCart className={`text-${cartItems.length > 0 ? "red-500" : "white"}`} />, name: `Cart (${cartItems.length})`, func: cart },
+    { icon: <FaSignOutAlt />, name: "Logout", func: LogoutUser },
   ];
 
   if (user && user.role === "admin") {
     options.unshift({
-      icon: <DashboardIcon />,
+      icon: <FaTachometerAlt />,
       name: "Dashboard",
       func: dashboard,
     });
@@ -51,8 +45,7 @@ const UserOptions = ({ user }) => {
   }
 
   function LogoutUser() {
-    toast.success("You logged out successfully");
-    console.log("Logged Out");
+    toast.success("Logged out successfully");
     dispatch(logout());
   }
 
@@ -60,19 +53,25 @@ const UserOptions = ({ user }) => {
     <Fragment>
       <Backdrop open={open} />
       <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
+        ariaLabel="User Options"
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
         direction="down"
-        className="speedDial"
+        className="fixed bottom-4 right-4 z-50"
         icon={
           <img
-            className="speedDialIcon"
+            className="w-10 h-10 rounded-full border-2 border-white"
             src={user && user.avatar && user.avatar.url ? user.avatar.url : "/Profile.png"}
             alt="Profile"
           />
         }
+        FabProps={{
+          style: {
+            backgroundColor: 'linear-gradient(to right, #6b46c1, #4299e1)', // Matching header gradient
+            color: 'white',
+          },
+        }}
       >
         {options.map((item) => (
           <SpeedDialAction
@@ -80,7 +79,8 @@ const UserOptions = ({ user }) => {
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
-            tooltipOpen={window.innerWidth < 600 ? true : false}
+            tooltipOpen={window.innerWidth < 600}
+            className="text-white hover:text-yellow-400 transition"
             tooltipPlacement="right"
           />
         ))}

@@ -1,16 +1,17 @@
-.MuiSpeedDial-root {
-    /* Apply styles to the SpeedDial component (dropdown) */
-    position: absolute;
-    z-index: 1000; /* Set a high z-index to ensure it appears on top of other elements */
-    display: none; /* Hide the dropdown by default */
-}
+.flex {
+    display: flex;
+  }
   
-.speedDial {
-    left: 3vmax;
-    top: 1.2vmax;
-}
-.speedDialIcon {
-    width: 56px;
-    height: 56px;
-    border-radius: 100%;
-}
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-start {
+    justify-content: flex-start;
+  }
+  
+  .md\\:justify-center {
+    @media (min-width: 768px) {
+      justify-content: center;
+    }
+  }

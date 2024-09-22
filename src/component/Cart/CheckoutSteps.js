@@ -1,22 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Step, StepLabel, Stepper, Typography } from "@material-ui/core";
+import { Stepper, Step, StepLabel } from "@material-ui/core";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import './CheckoutSteps.css';
 
 const CheckoutSteps = ({ activeStep }) => {
     const steps = [
         {
-            label: <Typography>Shipping Details</Typography>,
+            label: "Shipping Details",
             icon: <LocalShippingIcon />
         },
         {
-            label: <Typography>Confirm Order</Typography>,
+            label: "Confirm Order",
             icon: <LibraryAddCheckIcon />
         },
         {
-            label: <Typography>Payment</Typography>,
+            label: "Payment",
             icon: <AccountBalanceIcon />
         }
     ];
@@ -30,37 +29,33 @@ const CheckoutSteps = ({ activeStep }) => {
 
         window.addEventListener('resize', handleResize);
 
-        // Cleanup function
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []); // Empty dependency array to ensure the effect runs only once
-
-    const stepStyles = {
-        boxSizing: "border-box",
-        marginTop: marginTop
-    };
+    }, []);
 
     return (
         <Fragment>
-            <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
-                {steps.map((item, index) => (
-                    <Step
-                        key={index}
-                        active={activeStep === index ? true : false}
-                        completed={activeStep >= index ? true : false}
-                    >
-                        <StepLabel
-                            icon={item.icon}
-                            style={{
-                                color: activeStep >= index ? "tomato" : "rgba(0 , 0 , 0 , 0.649)"
-                            }}
-                        >
-                            {item.label}
-                        </StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
+            <div className={`flex justify-center mt-${marginTop} bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 p-6 `}>
+                <Stepper alternativeLabel activeStep={activeStep} className="w-full max-w-xl">
+                    {steps.map((item, index) => (
+                        <Step key={index} active={activeStep === index} completed={activeStep >= index}>
+                            <StepLabel
+                                icon={item.icon}
+                                className={`${
+                                    activeStep >= index ? 'text-orange-500' : 'text-gray-500'
+                                }`}
+                            >
+                                <span className={`${
+                                    activeStep >= index ? 'text-orange-500' : 'text-gray-500'
+                                }`}>
+                                    {item.label}
+                                </span>
+                            </StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+            </div>
         </Fragment>
     );
 };

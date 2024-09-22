@@ -1,165 +1,96 @@
-/** @format */
-
-.banner {
-  background-image: linear-gradient(to right, #635dc0, #3027ae);
-  height: 100vmin;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: white;
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
 
-.banner > h1 {
-  margin: 5vmax;
-  font: 600 2.5vmax 'Roboto';
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out forwards;
 }
 
-.banner > p {
-  font: 300 1.4vmax 'Lucida Sans';
+.animate-fadeInUp.delay-2 {
+  animation-delay: 0.5s;
 }
 
-.banner > a > button {
-  margin-bottom: 5vmax;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 0;
-  padding: 1vmax;
-  transition: all 0.5s;
-  width: 9vmax;
-  font: 500 1vmax 'Roboto';
+.animate-fadeInUp.delay-3 {
+  animation-delay: 1s;
 }
 
-.banner > a > button:hover {
-  background-color: rgba(255, 255, 255, 0);
-  color: white;
-}
-
-.searchBanner {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-
-.search {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  background-color: tomato;
-  border: 1px solid tomato;
-  border-radius: 0;
-  padding: 1vmax;
-  transition: all 0.5s;
-  font: 500 1vmax 'Roboto';
-}
-
-.search:hover {
-  background-color: white;
-  color: tomato;
-}
-
-.banner::after {
-  content: '';
-  width: 100vw;
-  height: 100vmin;
-  background-color: #ffffff;
+/* Card Styles for Overlapping */
+.relative .card {
   position: absolute;
-  top: 0%;
+  width: 100%; /* Card width */
+  max-width: 350px; /* Set a maximum width to limit card size */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  border-radius: 12px;
+  transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
+}
+
+.card-1 {
+  z-index: 3;
   left: 0;
-  clip-path: polygon(100% 68%, 0 100%, 100% 100%);
-  max-width: 100%;
+  top: 0; /* Default position for the first card */
 }
 
-.homeHeading {
-  text-align: center;
-  font-family: Roboto;
-  font-size: 1.4vmax;
-  border-bottom: 1px solid rgba(21, 21, 21, 0.5);
-  width: 20vmax;
-  padding: 1vmax;
-  margin: 5vmax auto;
-  color: rgb(0, 0, 0, 0.7);
+.card-2 {
+  z-index: 2;
+  left: -40px; /* Move slightly left */
+  top: 20px; /* Move slightly down */
 }
 
-.container {
-  display: flex;
-  margin: 2vmax auto;
-  width: 70vw;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
+.card-3 {
+  z-index: 1;
+  left: -80px; /* Move further left */
+  top: 40px; /* Move further down */
 }
 
-.productCard {
-  width: 14vmax;
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: rgb(48, 48, 48);
-  margin: 2vmax;
-  transition: all 0.5s;
-  padding-bottom: 0.5vmax;
+/* Hover effects for slight tilt or zoom */
+.relative .card:hover {
+  transform: scale(1.05); /* Slight zoom */
 }
 
-.productCard > img {
-  width: 14vmax;
+/* Home.css */
+.bg-transition {
+  transition: background-color 0.5s ease-in-out;
 }
 
-.productCard > div {
-  margin: 0.5vmax;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.productCard > div > span {
-  margin: 0.5vmax;
-  font: 300 0.7vmax 'Roboto';
-}
-
-.productCard > p {
-  font-family: 'Roboto';
-  font-size: 1.2vmax;
-  margin: 1vmax 0.5vmax;
-  margin-bottom: 0;
-}
-
-.productCard > span {
-  margin: 0.5vmax;
-  color: tomato;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 1vmax;
-}
-
-.productCard:hover {
-  box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
-  transform: translate(-1vmax);
-}
-
-.ratings {
-  margin-top: 0.4rem;
-}
-
-@media screen and (max-width: 600px) {
-  .productCard > p {
-    font-size: 1.7vmax;
+/* Home.css */
+@keyframes fadeBackground {
+  0% {
+      background-color: rgba(0, 0, 0, 0); /* Initial transparent */
   }
-
-  .productCard > div {
-    margin: 0vmax;
-    display: block;
+  50% {
+      background-color: rgba(0, 0, 0, 0); /* Mid transparent */
   }
-
-  .productCard > span {
-    font-size: 1.5vmax;
-  }
-
-  .productCard > div > span {
-    margin: 0 0.5vmax;
-    font: 300 1vmax 'Roboto';
+  100% {
+      background-color: rgba(255, 255, 255, 1); /* End white */
   }
 }
 
+.fade-in {
+  animation: fadeBackground 2s ease-in-out forwards; /* Change duration as needed */
+}
 
+
+/* Adjust responsive behavior */
+@media (max-width: 768px) {
+  .relative .card {
+      max-width: 300px;
+  }
+
+  .card-2 {
+      left: -20px;
+      top: 10px;
+  }
+
+  .card-3 {
+      left: -40px;
+      top: 20px;
+  }
+}

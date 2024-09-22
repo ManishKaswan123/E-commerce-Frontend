@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors, register } from "../../actions/userAction";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate } from "react-router-dom";
-import UserOptions from "../layout/Header/UserOptions";
 import { toast } from "react-hot-toast";
 
 const LoginSignUp = () => {
@@ -22,8 +21,6 @@ const LoginSignUp = () => {
     (state) => state.user
   );
 
-  const loginTab = useRef(null);
-  const registerTab = useRef(null);
   const [currentTab, setCurrentTab] = useState("login");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -76,6 +73,7 @@ const LoginSignUp = () => {
   };
 
   let redirectPath = location.search ? location.search.split("=")[1] : `/account/${user?._id}`;
+  
   if (isAuthenticated && location.pathname === '/login' && redirectPath) {
     redirectPath = redirectPath.startsWith('/') ? redirectPath : `/${redirectPath}`;
   }
@@ -83,7 +81,7 @@ const LoginSignUp = () => {
   useEffect(() => {
     if (isAuthenticated === true) {
       toast.success("User LoggedIn Successfully");
-      navigate(redirectPath);
+      navigate('/');
     } else if (error) {
       toast.error(error);
       dispatch(clearErrors());
@@ -97,129 +95,148 @@ const LoginSignUp = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
 
   return (
-    <Fragment>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Fragment>
-          <div className="LoginSignUpContainer">
-            <div className="LoginSignUpBox">
-              <div>
-                <div className="login_signUp_toggle">
-                  <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-                  <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
-                </div>
-                <button
-                  className={
-                    currentTab === "register" ? "switchToRight" : "switchToLeft"
-                  }
-                ></button>
-              </div>
-              {currentTab === "login" && (
-                <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-                  <div className="loginEmail">
-                    <MailOutlineIcon />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      required
-                      value={loginEmail}
-                      onChange={(e) => setLoginEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="loginPassword">
-                    <LockOpenIcon />
-                    <button
-                        className="passwordVisibilityBtn"
-                        type="button"
-                        onClick={togglePasswordVisibility}
-                        onMouseDown={(e) => e.preventDefault()} // This prevents the button from triggering a form submission
-                        >
-                        {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                    </button>
-
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
-                      required
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                    />
-                  </div>
-                  <div className="forgetPassword">
-                    <Link to="/password/forgot">Forget Password ?</Link>
-                  </div>
-                  <input type="submit" value="Login" className="loginBtn" />
-                </form>
-              )}
-              {currentTab === "register" && (
-                <form
-                  className="signUpForm"
-                  ref={registerTab}
-                  encType="multipart/form-data"
-                  onSubmit={registerSubmit}
-                >
-                  <div className="signUpName">
-                    <FaceIcon />
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      required
-                      name="name"
-                      value={name}
-                      onChange={registerDataChange}
-                    />
-                  </div>
-                  <div className="signUpEmail">
-                    <MailOutlineIcon />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      required
-                      name="email"
-                      value={email}
-                      onChange={registerDataChange}
-                    />
-                  </div>
-                  <div className="signUpPassword">
-                    <LockOpenIcon />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Password"
-                      required
-                      name="password"
-                      value={password}
-                      onChange={registerDataChange}
-                    />
-                    <button
-                      className="passwordVisibilityBtn"
-                      type="button"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                    </button>
-                  </div>
-                  <div className="registerImage">
-                    <img className="circularImage" src={avatarPreview} alt="Avatar Preview" />
-                    <input
-                      type="file"
-                      name="avatar"
-                      accept="image/*"
-                      onChange={registerDataChange}
-                    />
-                  </div>
-                  <input type="submit" value="Register" className="signUpBtn" />
-                </form>
-              )}
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-700 to-blue-700">
+        <div className="flex flex-col md:flex-row bg-[rgba(50,61,109,0.5)] backdrop-blur-md rounded-2xl shadow-xl p-4 max-w-4xl">
+            <div className="w-full md:w-1/2 rounded-2xl bg-gradient-to-r to-blue-400 from-purple-500 mb-4 md:mb-0">
+                <img
+                    src="https://designcode.io/images/illustrations/teamwork.svg"
+                    alt="Illustration"
+                    className="rounded-xl w-full h-full object-cover"
+                />
             </div>
-          </div>
-        </Fragment>
-      )}
-    </Fragment>
-  );
+            <div className="w-full md:w-1/2 pl-8">
+                <h2 className="text-white text-4xl font-semibold mb-4">
+                    {currentTab === "login" ? "Sign in" : "Sign up"}
+                </h2>
+                <p className="text-white mb-6">
+                    Access to thousands of products across various categories.
+                </p>
+                <form onSubmit={currentTab === "login" ? loginSubmit : registerSubmit}>
+                    {currentTab === "register" && (
+                        <div className="mb-4">
+                            <div className="flex items-center bg-gray-800 bg-opacity-30 rounded-full p-3">
+                                <FaceIcon className="text-gray-400 mx-2" />
+                                <input
+                                    type="text"
+                                    placeholder="Name"
+                                    required
+                                    name="name"
+                                    value={name}
+                                    onChange={registerDataChange}
+                                    className="bg-transparent w-full focus:outline-none text-white placeholder-gray-400"
+                                />
+                            </div>
+                        </div>
+                    )}
+                    <div className="mb-4">
+                        <div className="flex items-center bg-gray-800 bg-opacity-30 rounded-full p-3">
+                            <MailOutlineIcon className="text-gray-400 mx-2" />
+                            <input
+                                type="email"
+                                placeholder="Email address"
+                                required
+                                value={currentTab === "login" ? loginEmail : email}
+                                onChange={(e) =>
+                                    currentTab === "login"
+                                        ? setLoginEmail(e.target.value)
+                                        : registerDataChange(e)
+                                }
+                                name={currentTab === "register" ? "email" : undefined}
+                                className="bg-transparent w-full focus:outline-none text-white placeholder-gray-400"
+                            />
+                        </div>
+                    </div>
+                    <div className="mb-6">
+                        <div className="flex items-center bg-gray-800 bg-opacity-30 rounded-full p-3">
+                            <LockOpenIcon className="text-gray-400 mx-2" />
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                required
+                                value={currentTab === "login" ? loginPassword : password}
+                                onChange={(e) =>
+                                    currentTab === "login"
+                                        ? setLoginPassword(e.target.value)
+                                        : registerDataChange(e)
+                                }
+                                name={currentTab === "register" ? "password" : undefined}
+                                className="bg-transparent w-full focus:outline-none text-white placeholder-gray-400"
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="ml-auto text-gray-400 hover:text-white transition duration-300"
+                            >
+                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                            </button>
+                        </div>
+                    </div>
+                    {currentTab === "register" && (
+                        <div className="mb-6 flex items-center justify-center bg-gray-800 bg-opacity-30 p-2 rounded-lg shadow-md">
+                            <div className="flex flex-col items-center mr-4">
+                                <input
+                                    type="file"
+                                    name="avatar"
+                                    accept="image/*"
+                                    onChange={registerDataChange}
+                                    className="block w-full text-sm text-gray-900 bg-gray-200 rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:ring-blue focus:ring-opacity hover:bg-gray transition duration ease-in-out"
+                                />
+                            </div>
+                            <img
+                                src={avatarPreview}
+                                alt="Avatar Preview"
+                                className="rounded-full w-12 h-12 object-cover border border-blue shadow-lg"
+                            />
+                        </div>
+                    )}
+                    <button
+                        type="submit"
+                        className={`w-full py-2.5 ${
+                            currentTab === "login"
+                                ? 'bg-gradient-to-r from-blue-500 to-teal-400'
+                                : 'bg-gradient-to-r from-teal-400 to-blue-500'
+                        } text-white font-bold rounded-full shadow-lg hover:from-teal-400 hover:to-blue-500 transition duration-300 min-w-[150px] md:min-w-[200px]`}
+                    >
+                        {currentTab === "login" ? "Sign in" : "Register"}
+                    </button>
+                </form>
+                <div className="mt text-white">
+                    {currentTab === "login" ? (
+                        <>
+                            <p className="py-2 pt-4">
+                                Don't have an account?{' '}
+                                <span onClick={(e) => switchTabs(e, 'register')} className="text-blue hover:underline cursor-pointer">
+                                    Sign up
+                                </span>
+                            </p>
+                            <p className="py-2">
+                                Forgot password?{' '}
+                                <Link to="/password/forgot" className="text-blue hover:underline">
+                                    Reset password
+                                </Link>
+                            </p>
+                        </>
+                    ) : (
+                        <>
+                            <p className="pt-4">
+                                Already have an account?{' '}
+                                <span onClick={(e) => switchTabs(e, 'login')} className="text-blue hover:underline cursor-pointer">
+                                    Sign in
+                                </span>
+                            </p>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 };
 
 export default LoginSignUp;
+
+
+
