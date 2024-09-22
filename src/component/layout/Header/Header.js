@@ -70,42 +70,42 @@ const Header = () => {
               />
             </div>
             {menuOpenFirstAvatar && (
-              <div className="absolute left-6 mt-14  bg-[rgba(75,76,79,0.5)] backdrop-blur-lg backdrop-brightness-80 backdrop-saturate-150 shadow-lg rounded-2xl px-5 py-3 transform transition-opacity duration-400 ease-in-out opacity-100">
-                      <div className='flex flex-col items-center mb-2'>
-                  <div className='rounded-full p-3 bg-[rgba(109,109,246,0.1)]'>
-                    <Avatar
-                      width={42}
-                      height={42}
-                      name={user.name}
-                      imageUrl={user.profile_pic}
-                      userId={user._id}
-                    />
-                  </div>
-                </div>
-                <hr className='border-white' />
-              <ul class="flex flex-col  text-white px-8 mt-4">
-                <li onClick={() => navigate(`/orders/${user._id}`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <BsBoxSeamFill className='mr-2 text-violet-400' size={22}/>
-                  <span >Orders</span>
-                </li>
-                <hr className='border-white' />
-                <li onClick={() => navigate(`/account/${user._id}`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <FcBusinessContact className='mr-2' size={30}/>
-                  <span >Profile</span>
-                </li>
-                <hr className='border-white' />
-                <li onClick={() => navigate(`/cart`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <FaCartShopping className='mr-2 text-purple-500' size={22}/>
-                  <span >Cart {cartItems.length ? cartItems.length : 0}</span>
-                </li>
-                <hr className='border-white' />
-                <li onClick={handleLogout} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)]  rounded-md px-4 py-2.5">
-                  <HiOutlineLogout className='mr-2 text-red-500' size={22}/>
-                  <span >Logout</span>
-                </li>
-              </ul>
+        <div className="absolute left-6 mt-14 bg-[rgba(75,76,79,0.5)] backdrop-blur-lg backdrop-brightness-80 backdrop-saturate-150 shadow-lg rounded-2xl px-5 py-3 transform transition-opacity duration-400 ease-in-out opacity-100 z-[101]">
+          <div className='flex flex-col items-center mb-2'>
+            <div className='rounded-full p-3 bg-[rgba(109,109,246,0.1)]'>
+              <Avatar
+                width={42}
+                height={42}
+                name={user.name}
+                imageUrl={user.profile_pic}
+                userId={user._id}
+              />
             </div>
-            )}
+          </div>
+          <hr className='border-white' />
+          <ul className="flex flex-col text-white px-8 mt-4">
+            <li onClick={() => navigate(`/orders/${user._id}`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <BsBoxSeamFill className='mr-2 text-violet-400' size={22}/>
+              <span>Orders</span>
+            </li>
+            <hr className='border-white' />
+            <li onClick={() => navigate(`/account/${user._id}`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <FcBusinessContact className='mr-2' size={30}/>
+              <span>Profile</span>
+            </li>
+            <hr className='border-white' />
+            <li onClick={() => navigate(`/cart`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <FaCartShopping className='mr-2 text-purple-500' size={22}/>
+              <span>Cart {cartItems.length ? cartItems.length : 0}</span>
+            </li>
+            <hr className='border-white' />
+            <li onClick={handleLogout} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <HiOutlineLogout className='mr-2 text-red-500' size={22}/>
+              <span>Logout</span>
+            </li>
+          </ul>
+        </div>
+      )}
           </div>
           )}
         </div>
@@ -157,53 +157,53 @@ const Header = () => {
               />
             </div>
             {menuOpenSecondAvatar && (
-              <div class="absolute max-w-xs lg:mt-[5%] md:mt-[8%] right-[7%] bg-[rgba(75,76,79,0.5)] backdrop-blur-lg backdrop-brightness-80 backdrop-saturate-150 shadow-lg rounded-2xl px-5 py-3 transform transition-opacity duration-400 ease-in-out opacity-100">
-                <div className='flex flex-col items-center mb-2'>
-                  <div className='rounded-full p-3 bg-[rgba(109,109,246,0.1)]'>
-                    <Avatar
-                      width={42}
-                      height={42}
-                      name={user.name}
-                      imageUrl={user.profile_pic}
-                      userId={user._id}
-                    />
-                  </div>
-                </div>
-                <hr className='border-white' />
-              <ul class="flex flex-col  text-white px-8 mt-4">
-                <li onClick={() => navigate(`/orders/${user._id}`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <BsBoxSeamFill className='mr-2 text-violet-400' size={22}/>
-                  <span >Orders</span>
-                </li>
-                <hr className='border-white' />
-                <li onClick={() => navigate(`/account/${user._id}`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <FcBusinessContact className='mr-2' size={30}/>
-                  <span >Profile</span>
-                </li>
-                <hr className='border-white' />
-                <li onClick={() => navigate(`/cart`)} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                  <FaCartShopping className='mr-2 text-purple-500' size={22}/>
-                  <span >Cart ({cartItems.length ? cartItems.length : 0})</span>
-                </li>
-                <hr className='border-white' />
-
-                {isAuthenticated && (
-                <>
-                    <li onClick={() => handleNavLinkClick("/orders")} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
-                        <BsFillBoxSeamFill className='mr-2 text-violet-400' size={22} />
-                        Orders
-                    </li>
-                    <hr className='border-white' />
-                </>
-            )}
-                <li onClick={handleLogout} class="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)]  rounded-md px-4 py-2.5">
-                  <HiOutlineLogout className='mr-2 text-red-500' size={22}/>
-                  <span >Logout</span>
-                </li>
-              </ul>
+        <div className="absolute max-w-xs lg:mt-[5%] md:mt-[8%] right-[7%] bg-[rgba(75,76,79,0.5)] backdrop-blur-lg backdrop-brightness-80 backdrop-saturate-150 shadow-lg rounded-2xl px-5 py-3 transform transition-opacity duration-400 ease-in-out opacity-100 z-[101]">
+          <div className='flex flex-col items-center mb-2'>
+            <div className='rounded-full p-3 bg-[rgba(109,109,246,0.1)]'>
+              <Avatar
+                width={42}
+                height={42}
+                name={user.name}
+                imageUrl={user.profile_pic}
+                userId={user._id}
+              />
             </div>
-            
+          </div>
+          <hr className='border-white' />
+          <ul className="flex flex-col text-white px-8 mt-4">
+            <li onClick={() => navigate(`/orders/${user._id}`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <BsBoxSeamFill className='mr-2 text-violet-400' size={22}/>
+              <span>Orders</span>
+            </li>
+            <hr className='border-white' />
+            <li onClick={() => navigate(`/account/${user._id}`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <FcBusinessContact className='mr-2' size={30}/>
+              <span>Profile</span>
+            </li>
+            <hr className='border-white' />
+            <li onClick={() => navigate(`/cart`)} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <FaCartShopping className='mr-2 text-purple-500' size={22}/>
+              <span>Cart ({cartItems.length ? cartItems.length : 0})</span>
+            </li>
+            <hr className='border-white' />
+
+            {isAuthenticated && (
+              <>
+                <li onClick={() => handleNavLinkClick("/orders")} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+                  <BsFillBoxSeamFill className='mr-2 text-violet-400' size={22} />
+                  Orders
+                </li>
+                <hr className='border-white' />
+              </>
             )}
+            
+            <li onClick={handleLogout} className="flex items-center cursor-pointer hover:bg-[rgba(255,255,255,0.1)] rounded-md px-4 py-2.5">
+              <HiOutlineLogout className='mr-2 text-red-500' size={22}/>
+              <span>Logout</span>
+            </li>
+          </ul>
+        </div>
+      )}
           </div>
           )}
         </div>
